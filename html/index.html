@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+<head>
+<title>Dokerowy zegar</title>
+<style>
+.flexer {display: flex;}
+.flexer > div {flex: 1; text-align: center;}
+</style>
+</head>
+<body>
+<div class="flexer">
+	<div>
+		Lublin:<br><span id="zegar_lublin"></span>
+	</div>
+	<div>
+		Nowy Jork:<br><span id="zegar_ny"></span>
+	</div>
+	<div>
+		Sydney:<br><span id="zegar_sydney"></span>
+	</div>
+</div>
+
+
+<script>
+const zegar_lublin = document.getElementById("zegar_lublin");
+const zegar_ny = document.getElementById("zegar_ny");
+const zegar_sydney = document.getElementById("zegar_sydney");
+const zeroPad = (num) => String(num).padStart(2, '0');
+function format(d) {
+	return `${zeroPad(d.getHours())}:${zeroPad(d.getMinutes())}:${zeroPad(d.getSeconds())}`;
+}
+function clock() {
+	zegar_lublin.innerHTML = format(new Date());
+	zegar_ny.innerHTML = format(new Date((new Date).getTime() - 360 * 60 * 1000));
+	zegar_sydney.innerHTML = format(new Date((new Date).getTime() + 600 * 60 * 1000));
+	
+	setTimeout(clock, 1000);	
+}
+clock();
+
+</script>
+</body>
+</html>
